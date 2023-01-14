@@ -25,7 +25,7 @@ html, body {
     background-size: cover;
     background-repeat: no-repeat;
     transform: rotateY(-10deg);
-    perspective: 200cm;
+    perspective: 10cm;
     /* animation: rotate 10s linear infinite; */
 }
 

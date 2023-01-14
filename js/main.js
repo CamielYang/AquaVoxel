@@ -120,7 +120,7 @@ function moveFish(fish, duration) {
     const currentPos = structuredClone(fish.position);
     fish.position.x = randomInRange(50, window.innerWidth - 50);
     fish.position.y = randomInRange(50, window.innerHeight - 50);
-    fish.position.z = randomInRange(-200, 200);
+    fish.position.z = randomInRange(0, -500);
 
     const rotation = rotateFishStyling(currentPos, fish.position);
     fish.position.rotateY = rotation.rotateY;
@@ -141,13 +141,13 @@ function moveFish(fish, duration) {
     setTimeout(() => moveFish(fish, newDuration), duration);
 }
 
-for(let i = 0; i < 10; i++) {
+for(let i = 0; i < 15; i++) {
     const fish = createFish('goldfish', goldfish);
     document.body.appendChild(fish.element);
     moveFish(fish, 1000);
 }
 
-for(let i = 0; i < 10; i++) {
+for(let i = 0; i < 20; i++) {
     const fish = createFish('smallfish', smallfish);
     document.body.appendChild(fish.element);
     moveFish(fish, 1000);
