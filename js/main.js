@@ -11,7 +11,7 @@ const fishes = [
     {
         id: 'goldfish',
         model: goldfish,
-        count: randomInRange(10, 15),
+        count: randomInRange(10, 13),
     },
     {
         id: 'smallfish',
@@ -20,8 +20,13 @@ const fishes = [
     },
     {
         id: 'angelfish',
-        model: angelfish,
-        count: randomInRange(2, 5),
+        model: angelfish(),
+        count: randomInRange(2, 4),
+    },
+    {
+        id: 'angelfish',
+        model: angelfish('#5d2260', '#eaeaea'),
+        count: randomInRange(2, 4),
     }
 ]
 

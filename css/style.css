@@ -20,8 +20,7 @@ html, body {
 
 .scene {
     /* background-image: url(../background.jpg); */
-    background: rgb(27,65,98);
-    background: linear-gradient(0deg, rgba(27,65,98,1) 0%, rgba(27,81,129,1) 15%, rgba(26,104,171,1) 100%);
+    background-color: #125c9c;
     background-size: cover;
     background-repeat: no-repeat;
     perspective: 10cm;
@@ -29,6 +28,14 @@ html, body {
     width: 100vw;
     overflow: hidden;
     /* animation: rotate 10s linear infinite; */
+}
+
+.scene::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.5) 100%);
 }
 
 .voxel-model {
