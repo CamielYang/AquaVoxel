@@ -28,7 +28,7 @@ function rotateFishStyling(fish, currentPos, newPos) {
     const degreeY = radianY * (180 / Math.PI) - 90;
 
     fish.position.rotateY = cssShortestRotate(currentPos.rotateY, degreeY);
-    fish.position.rotateZ = cssShortestRotate(currentPos.rotateZ, degreeZ);
+    fish.position.rotateZ = degreeZ;
 
     fish.element.querySelector('.voxel-rotation').style.transform = `
         rotateY(${fish.position.rotateY}deg)
