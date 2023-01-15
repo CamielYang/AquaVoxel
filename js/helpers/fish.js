@@ -47,6 +47,7 @@ function moveFish(fish, duration) {
     rotateFishStyling(fish, currentPos, fish.position);
 
     element.style.transitionDuration = `${duration}ms`;
+    element.style.zIndex = fish.position.z;
     element.style.transform = `
         translateX(${fish.position.x}px)
         translateY(${fish.position.y}px)

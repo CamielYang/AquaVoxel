@@ -31,4 +31,4 @@ const fishes = [
 ]
 
 createFishes(fishes);
-// createFish('goldfish', angelfish);
+// createFish('goldfish', angelfish());
