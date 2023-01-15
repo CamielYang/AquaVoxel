@@ -42,7 +42,7 @@ function moveFish(fish, duration) {
     const currentPos = structuredClone(fish.position);
     fish.position.x = randomInRange(0, window.innerWidth);
     fish.position.y = randomInRange(0, window.innerHeight);
-    fish.position.z = randomInRange(0, -500);
+    fish.position.z = randomInRange(-500, 0);
 
     rotateFishStyling(fish, currentPos, fish.position);
 
