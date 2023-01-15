@@ -1,5 +1,6 @@
 import createVoxelModel from "./voxel.js";
 import randomInRange from "./randomInRange.js";
+import cssShortestRotate from "./cssShortestRotate.js";
 
 function createFish(fishId, fishModel) {
     const fish = {
@@ -14,19 +15,20 @@ function createFish(fishId, fishModel) {
     }
 
     document.body.appendChild(fish.element);
-    // rotateFishStyling(fish, fish.position, { x: 0, y: 10, z: 10});
     moveFish(fish, randomInRange(0, 1000));
 }
 
 function rotateFishStyling(fish, currentPos, newPos) {
-    const radianZ = Math.atan2(Math.abs(newPos.x - currentPos.x), newPos.y - currentPos.y);
+    const radianZ = (Math.abs(newPos.x - currentPos.x) > Math.abs(newPos.z - currentPos.z))
+        ? Math.atan2(Math.abs(newPos.x - currentPos.x), newPos.y - currentPos.y)
+        : Math.atan2(Math.abs(newPos.z - currentPos.z), newPos.y - currentPos.y);
     const degreeZ = (radianZ * (180 / Math.PI) * -1) + 90;
 
     const radianY = Math.atan2(newPos.x - currentPos.x, newPos.z - currentPos.z);
     const degreeY = radianY * (180 / Math.PI) - 90;
 
-    fish.position.rotateY = degreeY;
-    fish.position.rotateZ = degreeZ;
+    fish.position.rotateY = cssShortestRotate(currentPos.rotateY, degreeY);
+    fish.position.rotateZ = cssShortestRotate(currentPos.rotateZ, degreeZ);
 
     fish.element.querySelector('.voxel-rotation').style.transform = `
         rotateY(${fish.position.rotateY}deg)
