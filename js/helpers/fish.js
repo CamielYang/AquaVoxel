@@ -48,11 +48,7 @@ function moveFish(fish, duration) {
 
     element.style.transitionDuration = `${duration}ms`;
     element.style.zIndex = fish.position.z;
-    element.style.transform = `
-        translateX(${fish.position.x}px)
-        translateY(${fish.position.y}px)
-        translateZ(${fish.position.z}px)
-    `;
+    element.style.transform = `translate3d(${fish.position.x}px, ${fish.position.y}px, ${fish.position.z}px)`;
 
     setTimeout(() => moveFish(fish, newDuration), duration);
 }
