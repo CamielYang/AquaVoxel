@@ -2,7 +2,9 @@ import createVoxelModel from "./voxel.js";
 import randomInRange from "./randomInRange.js";
 import cssShortestRotate from "./cssShortestRotate.js";
 
-function createFish(fishId, fishModel) {
+const scene = document.querySelector('.scene');
+
+function createFish(fishModel) {
     const fish = {
         position: {
             x: 0,
@@ -11,10 +13,10 @@ function createFish(fishId, fishModel) {
             rotateY: 0,
             rotateZ: 0,
         },
-        element: createVoxelModel(fishId, fishModel)
+        element: createVoxelModel(fishModel)
     }
 
-    document.body.appendChild(fish.element);
+    scene.appendChild(fish.element);
     moveFish(fish, randomInRange(0, 1000));
 }
 
@@ -56,7 +58,7 @@ function moveFish(fish, duration) {
 function createFishes(fishesData) {
     fishesData.forEach(fishData => {
         for (let i = 0; i < fishData.count; i++) {
-            createFish(fishData.id, fishData.model);
+            createFish(fishData.model);
         }
     });
 }
