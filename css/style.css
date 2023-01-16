@@ -2,10 +2,15 @@
     --voxel-size: 10px;
     --voxel-translate: calc(var(--voxel-size) / 2);
     --voxel-light-color: 0, 0, 0;
+
+    --primary-color: rgb(38 180 149);
+    --secondary-color: rgb(38 180 149 / 50%);
+    --transition-duration: .2s;
 }
 
 * {
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 html, body {
@@ -61,10 +66,42 @@ html, body {
     pointer-events: none;
 }
 
+/* [==== BUTTON STYLING ====] */
+.icon-button {
+    will-change: box-shadow;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    background: #00000030;
+    box-shadow: inset 0 0 0px 2px ;
+    transition-duration: var(--transition-duration);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-color);
+}
+
+.icon-button:hover {
+    box-shadow: inset 0 0 0px 2px var(--primary-color);
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.icon-button:active {
+    box-shadow: inset 0 0 0px 2px var(--secondary-color);
+    color: var(--secondary-color);
+    transform: scale(.9);
+}
+
+
+/* [==== EDIT MENU STYLING ====] */
 .edit-menu {
     z-index: 10000;
     display: flex;
     position: absolute;
+    top: 0;
     left: 50%;
     transform: translateX(-50%) translateY(-100px);
     width: 100%;
@@ -82,21 +119,6 @@ html, body {
     transform: translateX(-50%) translateY(0px);
 }
 
-.button {
-    will-change: box-shadow;
-    cursor: pointer;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    border: 4px solid transparent;
-    background: #00000030;
-    box-shadow: inset 0 0 0px 2px rgb(38 180 149 / 50%);
-    transition-duration: .2s;
-}
-
-.button:hover {
-    box-shadow: inset 0 0 0px 2px rgb(38 180 149 / 100%);
-}
 
 /* [==== VOXEL STYLING ====] */
 .voxel-model {
@@ -112,12 +134,25 @@ html, body {
     top: 50%;
     min-width: 50px;
     min-height: 50px;
-    width: 125%;
-    height: 125%;
-    border: 5px solid #efefef;
+    width: 150%;
+    height: 150%;
+    border: 5px solid var(--primary-color);
     border-radius: 10px;
-    animation: pop-in 0.2s cubic-bezier(.17,.67,.21,1.5);
+    animation: pop-in-selected var(--transition-duration) cubic-bezier(.17,.67,.2, 1.3);
     animation-fill-mode: forwards;
+}
+
+.voxel-model.selected::before {
+    content: attr(id);
+    font-weight: bold;
+    text-align: center;
+    color: var(--primary-color);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    min-height: 50px;
+    height: 150%;
+    transform: translate(-50%, calc(-50% - 25px));
 }
 
 .voxel {
@@ -165,7 +200,7 @@ html, body {
 
 
 /* [==== KEYFRAMES ====] */
-@keyframes pop-in {
+@keyframes pop-in-selected {
     from {
         transform: translate(-50%, -50%) scale(0);
     }

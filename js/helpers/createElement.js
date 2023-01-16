@@ -11,4 +11,15 @@ function createElement(tagName, className = undefined, elProps = undefined) {
     return element;
 }
 
-export default createElement;
+function createIconButton(iconName, onClick) {
+    const button = createElement('button', 'icon-button', { onclick: onClick });
+    const icon = createElement('span', 'material-icons', { innerText: iconName });
+    button.appendChild(icon);
+
+    return button;
+}
+
+export {
+    createElement,
+    createIconButton
+};

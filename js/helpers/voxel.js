@@ -1,5 +1,5 @@
 // Helpers
-import createElement from './createElement.js';
+import { createElement } from './createElement.js';
 import adjustColor from './adjustColor.js';
 
 const voxelSize = 10;
