@@ -9,26 +9,26 @@ import angelfish from './voxelModels/angelfish.js';
 
 const fishes = [
     {
-        id: 'goldfish',
-        model: goldfish,
-        count: randomInRange(10, 13),
+        model: voxelModels.clownfish.model,
+        count: randomInRange(1, 2),
     },
     {
-        id: 'smallfish',
-        model: smallfish,
-        count: randomInRange(20, 25),
+        model: voxelModels.goldfish.model,
+        count: randomInRange(3, 5),
     },
     {
-        id: 'angelfish',
-        model: angelfish(),
-        count: randomInRange(2, 4),
+        model: voxelModels.smallfish.model,
+        count: 15,
     },
     {
-        id: 'angelfish',
-        model: angelfish('#5d2260', '#eaeaea'),
-        count: randomInRange(2, 4),
+        model: voxelModels.angelfish.model(),
+        count: randomInRange(1, 3),
+    },
+    {
+        model: voxelModels.angelfish.model('#5d2260', '#eaeaea'),
+        count: randomInRange(1, 3),
     }
 ]
 
 createFishes(fishes);
-// createFish('goldfish', angelfish());
+// createFishShowcase(voxelModels.smallfish.model);
