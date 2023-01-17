@@ -1,4 +1,5 @@
 // Helpers
+import './helpers/ui.js';
 import randomInRange from './helpers/randomInRange.js';
 import { createFish, createFishes } from './helpers/fish.js';
 
