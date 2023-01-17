@@ -3,9 +3,7 @@ import randomInRange from './helpers/randomInRange.js';
 import { createFish, createFishes } from './helpers/fish.js';
 
 // Models
-import goldfish from './voxelModels/goldfish.js';
-import smallfish from './voxelModels/smallfish.js';
-import angelfish from './voxelModels/angelfish.js';
+import voxelModels from './constants/voxelModels.js';
 
 const fishes = [
     {

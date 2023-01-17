@@ -1,4 +1,5 @@
 export default {
+    id: 'goldfish',
     size: {
         x: 8,
         y: 5,

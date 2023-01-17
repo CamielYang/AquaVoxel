@@ -1,5 +1,5 @@
 // Helpers
-import createElement from './createElement.js';
+import { createElement } from './createElement.js';
 import adjustColor from './adjustColor.js';
 
 const voxelSize = 10;
@@ -40,15 +40,20 @@ function removeHiddenFaces(voxels, voxelData, voxelElement) {
     hideVoxelFace([voxelData.x, voxelData.y, voxelData.z - 1], voxels, voxelElement, 'back', 'front');
 }
 
-function createVoxelModel(voxelId, modelData) {
+function createVoxelModel(modelData) {
     const voxels = {}
     const model = createElement('div', 'voxel-model');
     const rotation = createElement('div', 'voxel-rotation');
 
-    model.appendChild(rotation);
-    model.setAttribute("id", voxelId);
+    const width = modelData.size.x * voxelSize;
+    const height = modelData.size.y * voxelSize;
 
-    rotation.style.transformOrigin = `${(modelData.size.x * voxelSize) / 2}px ${(modelData.size.y * voxelSize) / 2}px`;
+    model.appendChild(rotation);
+    model.setAttribute("id", modelData.id);
+    model.style.height = `${height}px`;
+    model.style.width = `${width}px`;
+
+    rotation.style.transformOrigin = `${width / 2}px ${height / 2}px`;
     modelData.voxelsData.forEach(voxelData => {
         voxelData = {...defaultVoxelData, ...voxelData};
 
