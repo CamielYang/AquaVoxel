@@ -1,5 +1,6 @@
 export default function(color1 = '#31302f', color2 = '#ecdb45') {
     return {
+        id: 'angelfish',
         size: {
             x: 6,
             y: 7,
@@ -25,7 +26,7 @@ export default function(color1 = '#31302f', color2 = '#ecdb45') {
             { x: 3, y: 5, color: color1},
 
             { x: 4, y: 2, color: color1},
-            { x: 4, y: 3, color: "#000"},
+            { x: 4, y: 3, color: "#000000"},
             { x: 4, y: 4, color: color1},
 
             { x: 5, y: 3, color: color1},

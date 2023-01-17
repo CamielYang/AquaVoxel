@@ -1,34 +1,33 @@
 // Helpers
+import './helpers/ui.js';
 import randomInRange from './helpers/randomInRange.js';
-import { createFish, createFishes } from './helpers/fish.js';
+import { createFish, createFishes, createFishShowcase } from './helpers/fish.js';
 
 // Models
-import goldfish from './voxelModels/goldfish.js';
-import smallfish from './voxelModels/smallfish.js';
-import angelfish from './voxelModels/angelfish.js';
+import voxelModels from './constants/voxelModels.js';
 
 const fishes = [
     {
-        id: 'goldfish',
-        model: goldfish,
-        count: randomInRange(10, 13),
+        model: voxelModels.clownfish.model,
+        count: randomInRange(2, 3),
     },
     {
-        id: 'smallfish',
-        model: smallfish,
-        count: randomInRange(20, 25),
+        model: voxelModels.goldfish.model,
+        count: randomInRange(6, 8),
     },
     {
-        id: 'angelfish',
-        model: angelfish(),
+        model: voxelModels.smallfish.model,
+        count: 15,
+    },
+    {
+        model: voxelModels.angelfish.model(),
         count: randomInRange(2, 4),
     },
     {
-        id: 'angelfish',
-        model: angelfish('#5d2260', '#eaeaea'),
+        model: voxelModels.angelfish.model('#5d2260', '#eaeaea'),
         count: randomInRange(2, 4),
     }
 ]
 
-createFishes(fishes);
-// createFish('goldfish', angelfish());
+// createFishes(fishes);
+// createFishShowcase(voxelModels.smallfish.model);

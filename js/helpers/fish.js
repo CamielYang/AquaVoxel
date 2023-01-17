@@ -2,7 +2,9 @@ import createVoxelModel from "./voxel.js";
 import randomInRange from "./randomInRange.js";
 import cssShortestRotate from "./cssShortestRotate.js";
 
-function createFish(fishId, fishModel) {
+const scene = document.querySelector('.scene');
+
+function createFishShowcase(fishModel) {
     const fish = {
         position: {
             x: 0,
@@ -11,10 +13,28 @@ function createFish(fishId, fishModel) {
             rotateY: 0,
             rotateZ: 0,
         },
-        element: createVoxelModel(fishId, fishModel)
+        element: createVoxelModel(fishModel)
     }
 
-    document.body.appendChild(fish.element);
+    fish.element.classList.add('fish-showcase');
+    rotateFishStyling(fish, fish.position, { x: 10, y: 0, z: 4 });
+    scene.appendChild(fish.element);
+}
+
+
+function createFish(fishModel) {
+    const fish = {
+        position: {
+            x: 0,
+            y: 0,
+            z: 0,
+            rotateY: 0,
+            rotateZ: 0,
+        },
+        element: createVoxelModel(fishModel)
+    }
+
+    scene.appendChild(fish.element);
     moveFish(fish, randomInRange(0, 1000));
 }
 
@@ -37,7 +57,10 @@ function rotateFishStyling(fish, currentPos, newPos) {
 }
 
 function moveFish(fish, duration) {
-    const element = fish.element;
+    if (!fish.element.parentElement) {
+        return;
+    }
+
     const newDuration =  randomInRange(2500, 10000);
     const currentPos = structuredClone(fish.position);
     fish.position.x = randomInRange(0, window.innerWidth);
@@ -45,10 +68,9 @@ function moveFish(fish, duration) {
     fish.position.z = randomInRange(-500, 0);
 
     rotateFishStyling(fish, currentPos, fish.position);
-
-    element.style.transitionDuration = `${duration}ms`;
-    element.style.zIndex = fish.position.z;
-    element.style.transform = `translate3d(${fish.position.x}px, ${fish.position.y}px, ${fish.position.z}px)`;
+    fish.element.style.transitionDuration = `${duration}ms`;
+    fish.element.style.zIndex = fish.position.z;
+    fish.element.style.transform = `translate3d(${fish.position.x}px, ${fish.position.y}px, ${fish.position.z}px)`;
 
     setTimeout(() => moveFish(fish, newDuration), duration);
 }
@@ -56,12 +78,13 @@ function moveFish(fish, duration) {
 function createFishes(fishesData) {
     fishesData.forEach(fishData => {
         for (let i = 0; i < fishData.count; i++) {
-            createFish(fishData.id, fishData.model);
+            createFish(fishData.model);
         }
     });
 }
 
 export {
+    createFishShowcase,
     createFish,
     createFishes,
 };

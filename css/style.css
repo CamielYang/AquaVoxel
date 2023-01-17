@@ -2,18 +2,58 @@
     --voxel-size: 10px;
     --voxel-translate: calc(var(--voxel-size) / 2);
     --voxel-light-color: 0, 0, 0;
+
+    --primary-color: rgb(38 180 149);
+    --secondary-color: rgb(38 180 149 / 50%);
+    --tertiary-color: #00000030;
+
+    --transition-duration: .2s;
+    --transition-duration-menu: .5s;
 }
 
 * {
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 html, body {
     margin: 0px;
     padding: 0;
     height: 100%;
+    color: white;
+    user-select: none;
 }
 
+img {
+    -webkit-user-drag: none;
+}
+
+/* [==== SCROLLBAR ====] */
+/* width and height */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--tertiary-color);
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #00000050;
+}
+
+
+/* [==== GENERAL ====] */
 .scene, .voxel-model, .voxel, .voxel__face, .voxel-rotation {
     transform-style: preserve-3d;
 }
@@ -37,7 +77,7 @@ html, body {
     height: 25%;
     border-radius: 80% 100% 0% 0px;
     background: linear-gradient(0deg, rgb(97, 124, 123) 0%, #325575 85%);
-    box-shadow: rgb(0 0 0 / 60%) 0px 0px 180px 50px;
+    box-shadow: rgb(0 0 0 / 60%) 0px 0px 50vh 5vh;
     bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
@@ -48,14 +88,189 @@ html, body {
 .scene::after {
     content: "";
     position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
     background: radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.5) 100%);
 }
 
+.scene::after, .voxel-rotation {
+    pointer-events: none;
+}
+
+/* [==== BUTTON ====] */
+button {
+    pointer-events: visible;
+}
+
+.icon-button {
+    will-change: box-shadow;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    background: var(--tertiary-color);
+    box-shadow: inset 0 0 0px 2px ;
+    transition-duration: var(--transition-duration);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-color);
+}
+
+.icon-button:hover {
+    box-shadow: inset 0 0 0px 2px var(--primary-color);
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.icon-button:active {
+    box-shadow: inset 0 0 0px 2px var(--secondary-color);
+    color: var(--secondary-color);
+    transform: scale(.9);
+}
+
+
+/* [==== EDIT MENU ====] */
+.edit-menu {
+    pointer-events: none;
+    z-index: 10000;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100px);
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 25px;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    transition: transform var(--transition-duration-menu) ease-in-out;
+}
+
+.edit-menu.is--visible {
+    transform: translateX(-50%) translateY(0px);
+}
+
+/* [==== FISH MENU ====] */
+.fish-menu-container {
+    will-change: transform;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    width: 250px;
+    background-color: rgb(0 0 0 / 30%);
+    z-index: 1000;
+    transform: translateX(-251px);
+    transition-duration: var(--transition-duration-menu);
+    backdrop-filter: blur(3px);
+}
+
+.fish-menu-container.is--visible {
+    transform: translateX(0px);
+    box-shadow: 0 0 20px 5px rgb(0 0 0 / 20%);
+}
+
+.fish-menu-container__button {
+    left: 100%;
+    margin: 20px;
+    position: absolute;
+}
+
+.fish-menu {
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.fish-menu .fish-menu__title {
+    height: auto;
+    font-weight: bold;
+    font-size: 1.25rem;
+    padding: 20px 15px;
+}
+
+.fish-menu .fish-menu__item {
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    background: var(--tertiary-color);
+    margin: 0 15px 15px;
+    padding: 10px;
+    transition-duration: var(--transition-duration);
+    cursor: pointer;
+}
+
+.fish-menu .fish-menu__item:hover {
+    background-color: #00000060;
+}
+
+.fish-menu .fish-menu__item:active {
+    background-color: var(--tertiary-color);
+}
+
+.fish-menu .fish-menu__item img{
+    height: auto;
+    overflow: auto;
+    position: relative;
+    object-fit: contain;
+    margin-bottom: 10px;
+    transition-duration: var(--transition-duration);
+}
+
+.fish-menu .fish-menu__item:hover img {
+    transform: scale(1.1);
+}
+
+.fish-menu .fish-menu__item:active img {
+    transform: scale(.9);
+}
+
+.fish-menu .fish-menu__item .fish-menu__item__name {
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: .75rem;
+}
+
+
+/* [==== VOXEL ====] */
 .voxel-model {
     position: absolute;
+    transition-property: transform;
     transition-timing-function: ease-in-out;
+}
+
+.voxel-model.selected::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    min-width: 50px;
+    min-height: 50px;
+    width: 150%;
+    height: 150%;
+    border: 5px solid var(--primary-color);
+    border-radius: 10px;
+    animation: pop-in-selected var(--transition-duration) cubic-bezier(.17,.67,.2, 1.3);
+    animation-fill-mode: forwards;
+}
+
+.voxel-model.selected::before {
+    content: attr(id);
+    font-weight: bold;
+    text-align: center;
+    color: var(--primary-color);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    min-height: 50px;
+    height: 150%;
+    transform: translate(-50%, calc(-50% - 25px));
 }
 
 .voxel {
@@ -101,44 +316,20 @@ html, body {
     transform: rotateX(-90deg) translateZ(var(--voxel-translate));
 }
 
-/* .voxel__face--right::after {
-    content: '';
+.fish-showcase {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(var(--voxel-light-color), 0.05);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.voxel__face--left::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(var(--voxel-light-color), 0.1);
-}
 
-.voxel__face--top::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(var(--voxel-light-color), 0.15);
-}
-
-.voxel__face--bottom::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(var(--voxel-light-color), 0.2);
-} */
-
-/* rotate 360 */
-@keyframes rotate {
+/* [==== KEYFRAMES ====] */
+@keyframes pop-in-selected {
     from {
-        transform: rotateY(0deg);
+        transform: translate(-50%, -50%) scale(0);
     }
     to {
-        transform: rotateY(360deg);
+        transform: translate(-50%, -50%) scale(1);
     }
 }
