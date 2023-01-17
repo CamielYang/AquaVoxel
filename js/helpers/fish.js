@@ -4,6 +4,24 @@ import cssShortestRotate from "./cssShortestRotate.js";
 
 const scene = document.querySelector('.scene');
 
+function createFishShowcase(fishModel) {
+    const fish = {
+        position: {
+            x: 0,
+            y: 0,
+            z: 0,
+            rotateY: 0,
+            rotateZ: 0,
+        },
+        element: createVoxelModel(fishModel)
+    }
+
+    fish.element.classList.add('fish-showcase');
+    rotateFishStyling(fish, fish.position, { x: 10, y: 0, z: 4 });
+    scene.appendChild(fish.element);
+}
+
+
 function createFish(fishModel) {
     const fish = {
         position: {
@@ -66,6 +84,7 @@ function createFishes(fishesData) {
 }
 
 export {
+    createFishShowcase,
     createFish,
     createFishes,
 };

@@ -5,21 +5,21 @@ import goldfish from "../voxelModels/goldfish.js";
 import smallfish from "../voxelModels/smallfish.js";
 
 const voxelModels = {
-    'angelfish': {
-        image: 'angelfish.png',
-        model: angelfish,
-    },
-    'clownfish': {
-        image: 'clownfish.png',
-        model: clownfish,
+    'smallfish': {
+        image: 'images/smallfish.png',
+        model: smallfish,
     },
     'goldfish': {
-        image: 'goldfish.png',
+        image: 'images/goldfish.png',
         model: goldfish,
     },
-    'smallfish': {
-        image: 'smallfish.png',
-        model: smallfish,
+    'clownfish': {
+        image: 'images/clownfish.png',
+        model: clownfish,
+    },
+    'angelfish': {
+        image: 'images/angelfish.png',
+        model: angelfish,
     },
 };
 

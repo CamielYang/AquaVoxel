@@ -1,4 +1,9 @@
-import { createIconButton } from "./createElement.js";
+// Helpers
+import { createIconButton, createElement } from "./createElement.js";
+import { createFish } from "../helpers/fish.js";
+
+// Models
+import voxelModels from "../constants/voxelModels.js";
 
 let selectedFish;
 
@@ -22,20 +27,41 @@ function renderEditMenu() {
 };
 
 function renderFishMenu() {
-    const fishMenu = document.createElement('div');
-    fishMenu.classList.add('fish-menu');
+    const fishMenuContainer = createElement('div', 'fish-menu-container');
 
     const menuButton = createIconButton('menu', {
         onclick: () => {
-            document.querySelector('.fish-menu').classList.toggle('is--visible');
-            const buttonIcon = document.querySelector('.fish-menu-button span').textContent;
-            document.querySelector('.fish-menu-button span').textContent = buttonIcon == 'close' ? 'menu' : 'close';
+            document.querySelector('.fish-menu-container').classList.toggle('is--visible');
+            const buttonIcon = document.querySelector('.fish-menu-container__button span').textContent;
+            document.querySelector('.fish-menu-container__button span').textContent = buttonIcon == 'close' ? 'menu' : 'close';
         },
-        className: 'fish-menu-button'
+        className: 'fish-menu-container__button'
     });
+    fishMenuContainer.appendChild(menuButton);
 
-    fishMenu.appendChild(menuButton);
-    document.body.appendChild(fishMenu);
+    const fishMenu = createElement('div', 'fish-menu');
+    const fishMenuTitle = createElement('div', 'fish-menu__title', { innerText: 'Spawnlist' });
+    fishMenu.appendChild(fishMenuTitle);
+
+    Object.keys(voxelModels).forEach(key => {
+        const fishItem = createElement('div', 'fish-menu__item');
+        fishItem.addEventListener('click', () => {
+            const model = voxelModels[key].model;
+            const fish = typeof model === 'function' ? model() : model;
+            createFish(fish);
+        });
+
+        const fishItemImg = createElement('img', undefined, { src: voxelModels[key].image });
+        fishItem.appendChild(fishItemImg);
+
+        const fishItemName = createElement('div', 'fish-menu__item__name', { innerText: key });
+        fishItem.appendChild(fishItemName);
+
+        fishMenu.appendChild(fishItem);
+    });
+    fishMenuContainer.appendChild(fishMenu);
+
+    document.body.appendChild(fishMenuContainer);
 }
 
 renderEditMenu();

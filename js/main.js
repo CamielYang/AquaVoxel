@@ -1,7 +1,7 @@
 // Helpers
 import './helpers/ui.js';
 import randomInRange from './helpers/randomInRange.js';
-import { createFish, createFishes } from './helpers/fish.js';
+import { createFish, createFishes, createFishShowcase } from './helpers/fish.js';
 
 // Models
 import voxelModels from './constants/voxelModels.js';
@@ -29,6 +29,5 @@ const fishes = [
     }
 ]
 
-createFishes(fishes);
-
-// createFish(voxelModels.angelfish.model());
+// createFishes(fishes);
+// createFishShowcase(voxelModels.smallfish.model);
