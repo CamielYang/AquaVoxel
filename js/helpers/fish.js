@@ -4,7 +4,7 @@ import cssShortestRotate from "./cssShortestRotate.js";
 
 const scene = document.querySelector('.scene');
 
-function createFishShowcase(fishModel) {
+function createFishShowcase(fishModel, rotate) {
     const fish = {
         position: {
             x: 0,
@@ -17,6 +17,7 @@ function createFishShowcase(fishModel) {
     }
 
     fish.element.classList.add('fish-showcase');
+    rotate && fish.element.classList.add('is--rotate');
     rotateFishStyling(fish, fish.position, { x: 10, y: 0, z: 4 });
     scene.appendChild(fish.element);
 }

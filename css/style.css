@@ -14,6 +14,11 @@
 * {
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus {
+    outline: none;
 }
 
 html, body {
@@ -126,7 +131,7 @@ button {
     transform: scale(1.1);
 }
 
-.icon-button:active {
+.icon-button:active, .icon-button:focus {
     box-shadow: inset 0 0 0px 2px var(--secondary-color);
     color: var(--secondary-color);
     transform: scale(.9);
@@ -183,7 +188,7 @@ button {
 }
 
 .fish-menu {
-    overflow-y: scroll;
+    overflow-y: overlay;
     height: 100%;
 }
 
@@ -323,6 +328,10 @@ button {
     transform: translate(-50%, -50%);
 }
 
+.fish-showcase.is--rotate {
+    animation: rotate 10s linear infinite;
+}
+
 
 /* [==== KEYFRAMES ====] */
 @keyframes pop-in-selected {
@@ -331,5 +340,14 @@ button {
     }
     to {
         transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: translate(-50%, -50%) rotateY(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotateY(360deg);
     }
 }

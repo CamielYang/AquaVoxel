@@ -40,6 +40,10 @@ function removeHiddenFaces(voxels, voxelData, voxelElement) {
     hideVoxelFace([voxelData.x, voxelData.y, voxelData.z - 1], voxels, voxelElement, 'back', 'front');
 }
 
+function removeEmptyVoxels(voxelsParent) {
+    voxelsParent.querySelectorAll('.voxel:not(:has(.voxel__face))').forEach(voxel => voxel.remove());
+}
+
 function createVoxelModel(modelData) {
     const voxels = {}
     const model = createElement('div', 'voxel-model');
@@ -62,6 +66,8 @@ function createVoxelModel(modelData) {
         removeHiddenFaces(voxels, voxelData, voxelElement);
         rotation.appendChild(voxelElement);
     })
+
+    removeEmptyVoxels(rotation);
 
     return model;
 }
