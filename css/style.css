@@ -332,6 +332,11 @@ button {
     animation: rotate 10s linear infinite;
 }
 
+.voxel-tail {
+    transform-origin: right;
+    animation: rotate-tail 1s ease-in-out infinite alternate-reverse;
+}
+
 
 /* [==== KEYFRAMES ====] */
 @keyframes pop-in-selected {
@@ -349,5 +354,14 @@ button {
     }
     to {
         transform: translate(-50%, -50%) rotateY(360deg);
+    }
+}
+
+@keyframes rotate-tail {
+    from {
+        transform: rotateY(30deg);
+    }
+    to {
+        transform: rotateY(-30deg);
     }
 }

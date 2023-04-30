@@ -1,6 +1,7 @@
 import createVoxelModel from "./voxel.js";
 import randomInRange from "./randomInRange.js";
 import cssShortestRotate from "./cssShortestRotate.js";
+import { createElement } from "./createElement.js";
 
 const scene = document.querySelector('.scene');
 
@@ -13,7 +14,7 @@ function createFishShowcase(fishModel, rotate) {
             rotateY: 0,
             rotateZ: 0,
         },
-        element: createVoxelModel(fishModel)
+        element: createFish(fishModel, false)
     }
 
     fish.element.classList.add('fish-showcase');
@@ -23,7 +24,17 @@ function createFishShowcase(fishModel, rotate) {
 }
 
 
-function createFish(fishModel) {
+function createFish(fishModel, move = true) {
+    const model = createElement('div', 'voxel-model');
+    const rotation = createElement('div', 'voxel-rotation');
+    const tail = createVoxelModel(fishModel.tail)
+    tail.classList.add('voxel-tail');
+    const body = createVoxelModel(fishModel.body)
+
+    rotation.appendChild(tail);
+    rotation.appendChild(body);
+    model.appendChild(rotation);
+
     const fish = {
         position: {
             x: 0,
@@ -32,11 +43,13 @@ function createFish(fishModel) {
             rotateY: 0,
             rotateZ: 0,
         },
-        element: createVoxelModel(fishModel)
+        element: model
     }
 
     scene.appendChild(fish.element);
-    moveFish(fish, randomInRange(0, 1000));
+    move && moveFish(fish, randomInRange(0, 1000));
+
+    return fish.element;
 }
 
 function rotateFishStyling(fish, currentPos, newPos) {
@@ -70,7 +83,7 @@ function moveFish(fish, duration) {
 
     rotateFishStyling(fish, currentPos, fish.position);
     fish.element.style.transitionDuration = `${duration}ms`;
-    fish.element.style.zIndex = fish.position.z;
+    // fish.element.style.zIndex = fish.position.z;
     fish.element.style.transform = `translate3d(${fish.position.x}px, ${fish.position.y}px, ${fish.position.z}px)`;
 
     setTimeout(() => moveFish(fish, newDuration), duration);
@@ -78,6 +91,7 @@ function moveFish(fish, duration) {
 
 function createFishes(fishesData) {
     fishesData.forEach(fishData => {
+        console.log(fishData);
         for (let i = 0; i < fishData.count; i++) {
             createFish(fishData.model);
         }

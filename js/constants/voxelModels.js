@@ -4,6 +4,7 @@ import clownfish from "../voxelModels/clownfish.js";
 import goldfish from "../voxelModels/goldfish.js";
 import smallfish from "../voxelModels/smallfish.js";
 import pufferfish from "../voxelModels/pufferfish.js";
+import testFish from "../voxelModels/testFish.js";
 
 const voxelModels = {
     'smallfish': {
@@ -25,6 +26,10 @@ const voxelModels = {
     'pufferfish': {
         image: 'images/pufferfish.png',
         model: pufferfish,
+    },
+    'testFish': {
+        image: 'images/testFish.png',
+        model: testFish,
     },
 };
 
